@@ -1,8 +1,9 @@
 {
   "name": "spherical-harmonics-visualizer",
   "version": "1.0.0",
-  "private": true,
+  "private": false,
   "type": "module",
+  "homepage": "https://automatoc-ti.github.io/Spherical-Harmonics-Visualizer/",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
