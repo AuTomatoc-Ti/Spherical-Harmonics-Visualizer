@@ -1,0 +1,338 @@
+:root {
+  --bg-main: #070c17;
+  --bg-soft: #101a2d;
+  --panel: rgba(16, 25, 42, 0.88);
+  --panel-strong: rgba(10, 17, 32, 0.96);
+  --border: rgba(141, 165, 214, 0.23);
+  --text: #e9f0ff;
+  --muted: #9cadcb;
+  --accent: #4f86ff;
+  --shadow: 0 18px 32px rgba(0, 0, 0, 0.3);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: var(--text);
+  overflow: hidden;
+  background: var(--bg-main);
+}
+
+.app-shell {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+}
+
+.stage {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(1200px 620px at -20% -20%, rgba(79, 134, 255, 0.24), transparent 55%),
+    radial-gradient(900px 440px at 115% -10%, rgba(57, 176, 246, 0.2), transparent 60%),
+    linear-gradient(180deg, #0f182b 0%, var(--bg-main) 100%);
+}
+
+.view-layer {
+  position: absolute;
+  inset: 0;
+}
+
+.view-layer.hidden {
+  display: none;
+}
+
+#map2dWrap canvas,
+#sphere3dWrap canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+#overlayCanvas {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.floating-btn {
+  position: absolute;
+  z-index: 24;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--panel-strong);
+  color: var(--text);
+  width: 2.8rem;
+  height: 2.8rem;
+  cursor: pointer;
+  box-shadow: var(--shadow);
+  font-size: 1.1rem;
+  backdrop-filter: blur(10px);
+}
+
+.settings-btn {
+  top: 0.5rem;
+  left: 1rem;
+}
+
+.bottom-left {
+  left: 1rem;
+  bottom: 1rem;
+}
+
+.sidebar-panel {
+  position: absolute;
+  top: 4rem;
+  left: 1rem;
+  width: min(340px, calc(100vw - 2rem));
+  max-height: calc(100vh - 2rem);
+  padding: 0.9rem;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: rgba(10, 17, 32, 0.95);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(12px);
+  z-index: 22;
+  transform: translateX(-115%);
+  transition: transform 250ms ease;
+  overflow: auto;
+}
+
+.sidebar-panel.open {
+  transform: translateX(0);
+}
+
+.panel-header {
+  margin-bottom: 0.8rem;
+}
+
+.panel-header h2 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.panel-content {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.control-group label {
+  display: block;
+  margin-bottom: 0.45rem;
+  font-size: 0.92rem;
+}
+
+input[type="range"] {
+  width: 100%;
+  accent-color: var(--accent);
+}
+
+.checkbox-line {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.hint {
+  margin: 0.35rem 0 0;
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
+.action-btn {
+  border: 1px solid rgba(108, 140, 209, 0.5);
+  border-radius: 10px;
+  padding: 0.55rem 0.75rem;
+  background: rgba(51, 82, 156, 0.24);
+  color: var(--text);
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.top-right-controls {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 24;
+  display: flex;
+  gap: 0.35rem;
+  padding: 0.4rem;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--panel-strong);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(10px);
+}
+
+.lm-controls {
+  position: absolute;
+  top: 5.5rem;
+  right: 1rem;
+  z-index: 23;
+  width: min(220px, calc(100vw - 2rem));
+  padding: 0.7rem;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--panel-strong);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(10px);
+  display: grid;
+  gap: 0.6rem;
+}
+
+.lm-controls .control-group {
+  margin: 0;
+}
+
+.lm-controls label {
+  margin-bottom: 0.35rem;
+  font-size: 0.86rem;
+}
+
+.lm-controls input[type="range"] {
+  margin-bottom: 0.25rem;
+}
+
+.lm-controls .hint {
+  font-size: 0.78rem;
+  margin-top: 0.2rem;
+}
+
+.view-btn {
+  border: 1px solid transparent;
+  border-radius: 10px;
+  padding: 0.48rem 0.82rem;
+  font-weight: 600;
+  font-size: 0.84rem;
+  cursor: pointer;
+  background: transparent;
+  color: var(--muted);
+}
+
+.view-btn.active {
+  color: #f4f8ff;
+  background: linear-gradient(140deg, #406ce8, #4da5ff);
+  border-color: rgba(146, 181, 255, 0.4);
+}
+
+.equation-drawer {
+  position: absolute;
+  left: 1rem;
+  right: 1rem;
+  bottom: 1rem;
+  max-height: min(56vh, 520px);
+  z-index: 21;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: rgba(10, 17, 32, 0.95);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(12px);
+  padding: 0.8rem 1rem 1rem;
+  transform: translateY(calc(100% + 1rem));
+  transition: transform 260ms ease;
+  overflow: auto;
+}
+
+.equation-drawer.open {
+  transform: translateY(0);
+}
+
+.drawer-handle {
+  width: 56px;
+  height: 4px;
+  border-radius: 999px;
+  margin: 0 auto 0.7rem;
+  background: rgba(167, 189, 230, 0.45);
+}
+
+.equation-drawer h2 {
+  margin: 0 0 0.9rem;
+  font-size: 1rem;
+}
+
+.hover-panel {
+  position: fixed;
+  z-index: 25;
+  pointer-events: none;
+  padding: 0.5rem 0.7rem;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: rgba(10, 17, 32, 0.92);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(12px);
+  font-size: 0.8rem;
+  white-space: nowrap;
+  transform: translate(12px, 12px);
+}
+
+.hover-panel.hidden {
+  display: none;
+}
+
+.hover-row {
+  display: flex;
+  gap: 0.4rem;
+  align-items: center;
+  margin: 0.2rem 0;
+}
+
+.hover-row .label {
+  color: var(--muted);
+  min-width: 1.2rem;
+  text-align: right;
+}
+
+.hover-row .value {
+  color: var(--text);
+  font-family: "Courier New", monospace;
+  min-width: 4.2rem;
+}
+
+.equation-block {
+  padding-bottom: 0.7rem;
+  margin-bottom: 0.75rem;
+  border-bottom: 1px dashed rgba(152, 177, 220, 0.3);
+}
+
+.equation-block h3 {
+  margin: 0 0 0.45rem;
+  font-size: 0.9rem;
+  color: #d5e2ff;
+}
+
+.math-line {
+  min-height: 1.4rem;
+  margin: 0.35rem 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.math-line .katex-display {
+  margin: 0.12rem 0 !important;
+}
+
+@media (max-width: 860px) {
+  .top-right-controls {
+    right: 0.7rem;
+    top: 0.7rem;
+  }
+
+  .view-btn {
+    padding: 0.45rem 0.62rem;
+    font-size: 0.78rem;
+  }
+
+  .equation-drawer {
+    left: 0.7rem;
+    right: 0.7rem;
+    bottom: 0.7rem;
+    max-height: 62vh;
+  }
+}

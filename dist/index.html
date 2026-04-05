@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Spherical Harmonics Visualizer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script type="module" crossorigin src="/assets/index-BmA6oVA4.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-CTArVKiE.css">
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="stage" aria-label="Spherical harmonics view">
+        <div id="map2dWrap" class="view-layer">
+          <canvas id="harmonicCanvas" width="960" height="480"></canvas>
+          <canvas id="overlayCanvas" width="960" height="480"></canvas>
+        </div>
+        <div id="sphere3dWrap" class="view-layer hidden" aria-label="3D spherical harmonics"></div>
+      </section>
+
+      <button id="sidebarToggle" class="floating-btn settings-btn" type="button" aria-label="Open settings">☰</button>
+
+      <aside id="leftSidebar" class="sidebar-panel" aria-label="Settings sidebar">
+        <div class="panel-header">
+          <h2>Settings</h2>
+        </div>
+
+        <div class="panel-content">
+          <div class="control-group checkbox-line">
+            <input id="exactValueToggle" type="checkbox" />
+            <label for="exactValueToggle">Show exact hover values</label>
+          </div>
+
+          <div class="control-group">
+            <label for="cameraSpeedRange">Camera speed: <span id="cameraSpeedValue">2.0</span></label>
+            <input id="cameraSpeedRange" type="range" min="0.5" max="8" step="0.1" value="2" />
+          </div>
+
+          <button id="resetCameraBtn" class="action-btn" type="button">Focus original position</button>
+          <p class="hint">3D controls: WASD move, Q/E vertical, hold right mouse and drag to rotate.</p>
+        </div>
+      </aside>
+
+      <section class="top-right-controls" aria-label="View switcher">
+        <button id="view2dBtn" class="view-btn active" type="button">2D</button>
+        <button id="view3dBtn" class="view-btn" type="button">3D</button>
+        <button id="viewOrbitalBtn" class="view-btn" type="button">Orbital</button>
+      </section>
+
+      <section class="lm-controls" aria-label="Basis parameters">
+        <div class="control-group">
+          <label for="lRange">Degree <strong>l</strong>: <span id="lValue">2</span></label>
+          <input id="lRange" type="range" min="0" max="8" step="1" value="2" />
+        </div>
+        <div class="control-group">
+          <label for="mRange">Order <strong>m</strong>: <span id="mValue">1</span></label>
+          <input id="mRange" type="range" min="-2" max="2" step="1" value="1" />
+          <p class="hint">|m| ≤ l</p>
+        </div>
+      </section>
+
+      <div id="hoverPanel" class="hover-panel hidden" aria-label="Exact hover values">
+        <div class="hover-row">
+          <span class="label">θ:</span>
+          <span id="hoverTheta" class="value">-</span>
+        </div>
+        <div class="hover-row">
+          <span class="label">φ:</span>
+          <span id="hoverPhi" class="value">-</span>
+        </div>
+        <div class="hover-row">
+          <span class="label">Y:</span>
+          <span id="hoverYValue" class="value">-</span>
+        </div>
+        <div class="hover-row">
+          <span class="label">P:</span>
+          <span id="hoverPValue" class="value">-</span>
+        </div>
+      </div>
+
+      <button id="equationToggle" class="floating-btn bottom-left" type="button" aria-label="Open equation panel">∑</button>
+
+      <section id="equationDrawer" class="equation-drawer" aria-label="Equations and exact values">
+        <div class="drawer-handle"></div>
+        <h2>Equations & Exact Values</h2>
+
+        <div class="equation-block">
+          <h3>General</h3>
+          <div id="generalY" class="math-line"></div>
+          <div id="generalP" class="math-line"></div>
+          <div id="generalN" class="math-line"></div>
+        </div>
+
+        <div class="equation-block">
+          <h3>Current (l,m)</h3>
+          <div id="specificY" class="math-line"></div>
+          <div id="specificN" class="math-line"></div>
+          <div id="specificP" class="math-line"></div>
+        </div>
+
+        <div class="equation-block">
+          <h3>Hover</h3>
+          <div id="hoverPosition" class="math-line"></div>
+          <div id="hoverY" class="math-line"></div>
+          <div id="hoverP" class="math-line"></div>
+        </div>
+      </section>
+    </main>
+
+  </body>
+</html>
